@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
+
+  void login(){
+
+  }
+
  
 
   @override
@@ -36,7 +41,23 @@ class LoginPage extends StatelessWidget {
            obscureText: true, 
            tEController: passwordController,),
           SizedBox(height: 25),
-          MySubmitButton(),
+          MySubmitButton(buttonText: 'Login',
+           onTap: login,),
+           SizedBox(height: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Not a member? ",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),),
+              Text("Register now",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),),
+            ],
+          ),
         ],
        ),
      ),
