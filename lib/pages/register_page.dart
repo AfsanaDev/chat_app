@@ -3,7 +3,9 @@ import 'package:chat_app/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+
+  final void Function()? onTap;
+  const RegisterPage({super.key , required this.onTap});
 
 
   void register(){
@@ -58,11 +60,14 @@ class RegisterPage extends StatelessWidget {
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
               ),),
-              Text("Login now",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),),
+              GestureDetector(
+                onTap: onTap,
+                child: Text("Login now",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),),
+              ),
             ],
           ),
         ],

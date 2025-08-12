@@ -3,7 +3,8 @@ import 'package:chat_app/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final void Function()? onTap;
+  const LoginPage({super.key, required this.onTap});
 
 
   void login(){
@@ -51,11 +52,14 @@ class LoginPage extends StatelessWidget {
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
               ),),
-              Text("Register now",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),),
+              GestureDetector(
+               onTap: onTap,
+                child: Text("Register now",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),),
+              ),
             ],
           ),
         ],

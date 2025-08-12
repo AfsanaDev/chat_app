@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "34715017554",
+    "project_id": "messagingapp-f440c",
+    "storage_bucket": "messagingapp-f440c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34715017554:android:f939d6fce441ab499a5a8b",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5RNPNKrjNIhkW1YongUar8IOCT3N1wjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
