@@ -1,22 +1,34 @@
+import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/components/my_submit_button.dart';
 import 'package:chat_app/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
+  TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
   final void Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  LoginPage({super.key, required this.onTap});
 
 
-  void login(){
-
+ 
+  void login(BuildContext context)async{
+    final authService = AuthService();
+    try{
+      await authService.signInWithEmailPassword(_emailController.text, _passwordController.text);
+    }catch(e){
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(e.toString()),
+        );
+      });
+    }
   }
-
  
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    
     return Scaffold(
      backgroundColor: Theme.of(context).colorScheme.surface,
 
@@ -36,14 +48,14 @@ class LoginPage extends StatelessWidget {
           SizedBox(height: 25),
           MyTextField(hintText: 'Email',
            obscureText: false, 
-           tEController: emailController,),
+           tEController: _emailController,),
           SizedBox(height: 10),
           MyTextField(hintText: 'Password',
            obscureText: true, 
-           tEController: passwordController,),
+           tEController: _passwordController,),
           SizedBox(height: 25),
           MySubmitButton(buttonText: 'Login',
-           onTap: login,),
+           onTap: () => login(context),),
            SizedBox(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -67,4 +79,6 @@ class LoginPage extends StatelessWidget {
      ),
     );
   }
+
+ 
 }
