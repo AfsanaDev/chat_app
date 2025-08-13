@@ -1,24 +1,48 @@
+import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/components/my_submit_button.dart';
 import 'package:chat_app/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
   final void Function()? onTap;
-  const RegisterPage({super.key , required this.onTap});
+  RegisterPage({super.key , required this.onTap});
 
 
-  void register(){
-
+  void register(BuildContext context){
+    final _auth =AuthService();
+   if( _passwordController.text.trim() == _confirmPasswordController.text.trim()){
+    try{
+       _auth.signUpWithEmailPassword(
+      _emailController.text.trim(), _passwordController.text.trim()) ;
+    }catch(e){
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(e.toString()),
+        );
+      });
+    }
+   }else{
+    showDialog(context: context, 
+    builder: (context) {
+        return AlertDialog(
+          title: Text("Password don't match"),
+          //content: Text("Password does not match"),
+        );
+      });
+   }
   }
 
  
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController confirmPasswordController = TextEditingController();
+    
     return Scaffold(
      backgroundColor: Theme.of(context).colorScheme.surface,
 
@@ -38,20 +62,21 @@ class RegisterPage extends StatelessWidget {
           SizedBox(height: 25),
           MyTextField(hintText: 'Email',
            obscureText: false, 
-           tEController: emailController,),
+           tEController: _emailController,),
           SizedBox(height: 10),
           MyTextField(hintText: 'Password',
            obscureText: true, 
-           tEController: passwordController,),
+           tEController: _passwordController,),
            SizedBox(height: 10),
            MyTextField(
               hintText: 'Confirm Password',
               obscureText: true,
-              tEController: confirmPasswordController,
+              tEController: _confirmPasswordController,
             ),
           SizedBox(height: 25),
-          MySubmitButton(buttonText: "Register",
-           onTap: register,),
+          MySubmitButton(
+            buttonText: "Register",
+           onTap:()=> register(context) ,),
            SizedBox(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
